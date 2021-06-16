@@ -1,3 +1,5 @@
+# main script to control my bot in the RL_Bot framework.
+
 from rlbot.agents.base_agent import BaseAgent, SimpleControllerState
 from rlbot.messages.flat.QuickChatSelection import QuickChatSelection
 from rlbot.utils.structures.game_data_struct import GameTickPacket
