@@ -1,7 +1,7 @@
 # rocket_league_ai
 My attempt at creating a Rocket League bot using a neural network trained exclusively on human replays
 
-I understand that this has been attempted numerous times before and that the unique challenges of using human replay data are difficult to overcome, but I still wanted to try it and this is what I have. If you want to learn more about my process or see the performance of one of my models, visit [natebake.dev/code/rl-ai](natebake.dev/code/rl-ai).
+I understand that this has been attempted numerous times before and that the unique challenges of using human replay data are difficult to overcome, but I still wanted to try it and this is what I have. If you want to learn more about my process or see the performance of one of my models, visit [natebake.dev/code/rl-ai](https://natebake.dev/code/rl-ai).
 
 ### File Structure
 | folder  | description                                                                                             |
@@ -13,7 +13,7 @@ I understand that this has been attempted numerous times before and that the uni
 
 ### Dependencies
 You will need Python 3 installed with NumPy, Tensorflow, and maybe some others. I don't remember.
-This proejct also requires [rattletrap](https://github.com/tfausak/rattletrap) for parsing and [RLBot](rlbot.org) for integration with Rocket League.
+This proejct also requires [rattletrap](https://github.com/tfausak/rattletrap) for parsing and [RLBot](https://rlbot.org) for integration with Rocket League.
 
 ### Instructions
 Here is a brief explanation of how to run the scripts and what they do.
@@ -36,11 +36,11 @@ jupyter notebook
 # train_model.ipynb is the notebook where i've tried training a bunch of models with various hyperparameters.
 ```
 
-I used these scripts to collect and process about 15,000 replays of gold/silver 1v1 matches from [ballchasing.com](ballchasing.com), which yielded a dataset of about 250 million rows [50 GB].
+I used these scripts to collect and process about 15,000 replays of gold/silver 1v1 matches from [ballchasing.com](https://ballchasing.com), which yielded a dataset of about 250 million rows [50 GB].
 
 I included a few replays in the data folders just so that GitHub would not delete the folders, but if you try to train on just these your model will immediately overfit.
 
-I also added one of my old .h5 files which you can test in game if you create your own [RLBot](rlbot.org).
+I also added one of my old .h5 files which you can test in game if you create your own [RLBot](https://rlbot.org).
 
 ### Resources
 - [Sam Mish's Notes and Code](https://samuelpmish.github.io/notes/RocketLeague/) are extremely useful for estimating aerial inputs from replay files, and I can't take credit for any of it.
