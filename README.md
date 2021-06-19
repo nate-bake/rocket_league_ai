@@ -1,10 +1,18 @@
 # rocket_league_ai
-my attempt at creating a rocket league bot using only ML from human replays
+My attempt at creating a Rocket League bot using a neural network trained exclusively on human replays
 
+I understand that this has been attempted numerous times before and that the unique challenges of using human replay data are difficult to overcome, but I still wanted to try it and this is what I have. If you want to learn more about my process or see the performance of one of my models, visit natebake.dev/code/rl-ai.
 
-many brilliant members of the rl_bot community [https://discord.gg/uFW4sDVSs3] have all but concluded that training a model to play rocket league based solely on replays of human gameplay is not really feasible [due to many factors including human inconsistency and the lack of detail and accuracy in the game's existing replay system.]
-i was not aware of these conclusions when i embarked on this project, but i still saw some results that i felt were encouraging so i decided to share my work here.
+**File Structure**
+- scripts :: contains runnable code for collecting/processing replays as well as a jupyter notebook for training.
+- data :: used to organize .replay files, .json files [parsed replays], and .npy files that comprise the dataset.
+- models :: for storing tensorflow models and checkpoints, which can be loaded by RLBot.
+- bot :: the source code for my RLBot, which can predict outputs using a model or follow a script of controller inputs.
 
-i ended up collecting about 15,000 1v1 replays in the silver and gold rank categories, and processed them from the perspective of both players. this yielded a dataset of around 50 gigabytes with 250 million rows, upon which to train. obviously i have not uploaded all the data here, only about 10 replays to test with.
-
-this repository contains the full scope of my endeavor. from automating replay collection from ballchasing.com, to parsing these replays and compiling a dataset, to training a model on the data via tensorflow, all the way to connecting the model to the game using rl_bot.
+**Instructions**
+Here is a brief explanation of how to run the scripts and what they do.
+`python3 fetch_ids.py` creates a csv file containing a bunch of names of replays from the ballchasing.com API.
+`python3 fetch_replays.py` gets the replays listed in ids.csv and places them in data/new_replays. there is a limit on how many can be fetched in a certain time period.
+`./parse_new_replays.sh` uses rattletrap to create .json files for each replay and puts them in data/new_json. replays are moved to data/parsed_replays.
+`python3 process_new_json.py` reads json files in parallel and puts a numpy file in data/npy which contains a row of game-state, outputs for each frame.
+`train_model.ipynb` is my jupyter notebook where i have tried training a bunch of models with various hyperparameters.
