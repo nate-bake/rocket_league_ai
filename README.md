@@ -43,5 +43,5 @@ I included a few replays in the data folders just so that GitHub would not delet
 I also added one of my old .h5 files which you can test in game if you create your own [RLBot](rlbot.org).
 
 ### References
-[Sam Mish's Notes and Code](https://samuelpmish.github.io/notes/RocketLeague/) were extremely useful for estimating aerial inputs from the replay files, and I can't take credit for any of it.
-The [RLBot Discord](https://discord.com/invite/xuWjbw7A?utm_source=Discord%20Widget&utm_medium=Connect) is also a terrific resource if you have any interest in making some sort of Rocket League bot. Lots of incredibly smart programmers and friendly folks!
+- [Sam Mish's Notes and Code](https://samuelpmish.github.io/notes/RocketLeague/) are extremely useful for estimating aerial inputs from replay files, and I can't take credit for any of it.
+- The [RLBot Discord](https://discord.com/invite/xuWjbw7A?utm_source=Discord%20Widget&utm_medium=Connect) is also a terrific resource if you have any interest in making some sort of Rocket League bot. Lots of incredibly smart programmers and friendly folks!
