@@ -3,6 +3,7 @@ My attempt at creating a Rocket League bot using a neural network trained exclus
 
 I understand that this has been attempted numerous times before and that the unique challenges of using human replay data are difficult to overcome, but I still wanted to try it and this is what I have. If you want to learn more about my process or see the performance of one of my models, visit <a href="https://natebake.dev/code/rl-ai" target="_blank">natebake.dev/code/rl-ai</a>.
 
+
 ### File Structure
 | folder  | description                                                                                             |
 | :------ | :------------------------------------------------------------------------------------------------------ |
@@ -11,9 +12,11 @@ I understand that this has been attempted numerous times before and that the uni
 | models  | for storing tensorflow models and checkpoints, which can be loaded by RLBot.                            |
 | bot     | source code for my RLBot, which can follow a script of controller inputs or predict them using a model. |
 
+
 ### Dependencies
 You will need Python 3 installed with NumPy, Tensorflow, and maybe some others. I don't remember.
 This proejct also requires <a target="_blank" href="https://github.com/tfausak/rattletrap">rattletrap</a> for parsing and <a target="_blank" href="https://rlbot.org">RLBot</a> for integration with Rocket League.
+
 
 ### Instructions
 Here is a brief explanation of how to run the scripts and what they do.
@@ -36,12 +39,16 @@ jupyter notebook
 # train_model.ipynb is the notebook where i've tried training a bunch of models with various hyperparameters.
 ```
 
+
 I used these scripts to collect and process about 15,000 replays of gold/silver 1v1 matches from <a target="_blank" href="https://ballchasing.com">ballchasing.com</a>, which yielded a dataset of about 250 million rows [50 GB].
 
 I included a few replays in the data folders just so that GitHub would not delete the folders, but if you try to train on just these your model will immediately overfit.
 
 I also added one of my old .h5 files which you can test in game if you create your own <a target="_blank" href="https://rlbot.org">RLBot</a>.
 
+
 ### Resources
 - <a target="_blank" href="https://samuelpmish.github.io/notes/RocketLeague/">Sam Mish's Notes and Code</a> are extremely useful for estimating aerial inputs from replay files, and I can't take credit for any of it.
 - The <a target="_blank" href="https://discord.com/invite/xuWjbw7A?utm_source=Discord%20Widget&utm_medium=Connect">RLBot Discord</a> is also a terrific resource if you have any interest in making some sort of Rocket League bot. Lots of incredibly knowledgable programmers and friendly folks!
+
+
