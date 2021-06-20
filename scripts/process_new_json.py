@@ -1,6 +1,6 @@
 import numpy as np
 import time
-import sys, os
+import os
 import shutil
 import traceback
 import json_processor

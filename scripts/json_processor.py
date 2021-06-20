@@ -27,28 +27,29 @@ def player_exists(new_player):
             return True
     return False
 
-def initialize_players(frame,total_frames):
+def initialize_players(frame,total_frames,making_script):
     global players
+    global me
     for replication in frame['replications']:
         new_player = get_new_player(replication,total_frames)
         if new_player is not None and not player_exists(new_player):
             players.append(new_player)
-            if new_player.username in ["wheat toast","NAVID","naynaybotbot","navio"]:
-            	# me = new_player
-                players.remove(new_player)
-    if len(players) != 2: # ONLY SOLO DUEL RIGHT NOW
+    if len(players) != 2 and not making_script: # only solo duel
         sys.exit(1)
-    # for player in players:
-    #     if player != me:
-    #         opponent = player
-    #         break
 
-def choose_me(color):
+def choose_me_color(color):
     global players
     for player in players:
         if player.team == color: me = player
         else: opponent = player
     return (me, opponent)
+
+def choose_me_username(username):
+    global players
+    me = None
+    for player in players:
+        if player.username == username: me = player
+    return me
 
 def define_teams(frame):
     for replication in frame['replications']:
@@ -573,7 +574,41 @@ def write_frame(framenumber,output,count):
 
     return 1
 
-def process_replay(filename):
+def write_inputs(framenumber,output,count):
+    frame = me.frames[framenumber]
+    next_frame = me.frames[framenumber+1]
+    my_state = me.frames[framenumber].rb_state
+
+    if my_state is None or next_frame.rb_state is None:
+        output[count] = [next_frame.delta,0,0,0,0,0,0,0]
+        return 1
+
+    if not my_state.is_in_aerial_box():
+        next_frame.rb_state.estimated_aerial_input[2] = next_frame.steer_float
+        next_frame.rb_state.estimated_aerial_input[0:2] = [0,0]
+    else:
+        next_frame.handbrake_bool = False
+    if next_frame.dodge_bool:
+        next_frame.rb_state.estimated_aerial_input[1] = next_frame.dodge_y_float
+        next_frame.rb_state.estimated_aerial_input[2] = next_frame.dodge_x_float*-1
+    if next_frame.double_jump_bool:
+        next_frame.rb_state.estimated_aerial_input[1:3] = [0,0]
+
+    if frame.boost_float == 0: next_frame.boost_bool = False
+
+    output[count] = [next_frame.delta,\
+    bool_to_float(next_frame.boost_bool),bool_to_float(next_frame.jump_button_bool()),bool_to_float(next_frame.handbrake_bool),\
+    # bool_to_float(next_frame.dodge_bool),\
+    next_frame.throttle_float,\
+    # next_frame.steer_float,\
+    next_frame.rb_state.estimated_aerial_input[0],next_frame.rb_state.estimated_aerial_input[1],next_frame.rb_state.estimated_aerial_input[2],\
+    # next_frame.dodge_y_float, next_frame.dodge_x_float*-1\
+    ]
+
+    return 1
+
+
+def process_replay(filename, script_player=None):
 
     global players
     global unclaimed_trackers
@@ -599,7 +634,7 @@ def process_replay(filename):
     global ball
     ball = actor(total_frames)
     
-    initialize_players(all_frames[0],total_frames)
+    initialize_players(all_frames[0],total_frames,script_player)
     
     for framenumber, frame in enumerate(all_frames):
     
@@ -629,7 +664,20 @@ def process_replay(filename):
 
     resolve_kickoff_states(total_frames)
 
-    me, opponent = choose_me('blue') # will swap automatically for second output
+    if script_player is not None:
+        me = choose_me_username(script_player)
+        if me is None: sys.exit(f'No player found with username {script_player}')
+        count = 0
+        output = np.zeros((50000,8),dtype=np.float16)
+        for framenumber, frame in enumerate(all_frames):
+            if framenumber < total_frames-1: count += write_inputs(framenumber,output,count)
+        for i, row in enumerate(output):
+            if np.array_equal(row,np.zeros(8)):
+                output = output[0:i]
+                return output
+                
+    else: # get both blue and orange perspectives
+        me, opponent = choose_me_color('blue') # will swap automatically for second output
 
     count = 0
     output1 = np.zeros((50000,99),dtype=np.float16)
