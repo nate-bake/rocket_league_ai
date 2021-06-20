@@ -13,7 +13,7 @@ I understand that this has been attempted numerous times before and that the uni
 <br>
 
 ## Dependencies
-You will need Python 3 installed with NumPy, Tensorflow, and maybe some others. I don't remember.
+Python 3 with NumPy, Tensorflow, and maybe some others. I don't remember.
 This proejct also requires <a target="_blank" href="https://github.com/tfausak/rattletrap">Rattletrap</a> for parsing and <a target="_blank" href="https://rlbot.org">RLBot</a> for integration with Rocket League.
 <br><br>
 ## Instructions
