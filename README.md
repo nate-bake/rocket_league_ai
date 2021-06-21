@@ -7,7 +7,7 @@ I understand that this has been attempted numerous times before and that the uni
 | folder  | description                                                                                             |
 | :------ | :------------------------------------------------------------------------------------------------------ |
 | scripts | contains runnable code for collecting/processing replays as well as a jupyter notebook for training.    |
-| data    | used to organize .replay files, .json files [parsed replays], and .npy files that comprise the dataset. |
+| data    | used to organize replay files, json files, and numpy files which comprise the dataset.                  |
 | models  | for storing tensorflow models and checkpoints, which can be loaded by RLBot.                            |
 | bot     | source code for my RLBot, which can follow a script of controller inputs or predict them using a model. |
 <br>
